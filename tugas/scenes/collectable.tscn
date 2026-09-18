@@ -1,0 +1,139 @@
+[gd_scene format=3 uid="uid://b6fprit7b3x7r"]
+
+[ext_resource type="Script" uid="uid://dpl0a287suiyn" path="res://script/collectable.gd" id="1_i8gcc"]
+[ext_resource type="Texture2D" uid="uid://casn0xpq7kphi" path="res://assets/images/collectable/New Piskel (1).png" id="1_ti8a4"]
+[ext_resource type="Texture2D" uid="uid://c1emux8fs565m" path="res://assets/images/collectable/Collected.png" id="2_ftjwp"]
+[ext_resource type="AudioStream" uid="uid://cm28ube1qgpyl" path="res://assets/sounds/collect_apple.wav" id="4_cy7d5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uvacn"]
+atlas = ExtResource("2_ftjwp")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r08pg"]
+atlas = ExtResource("2_ftjwp")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nx4ax"]
+atlas = ExtResource("2_ftjwp")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eyudh"]
+atlas = ExtResource("2_ftjwp")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jmqx7"]
+atlas = ExtResource("2_ftjwp")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cidxd"]
+atlas = ExtResource("2_ftjwp")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_llfh3"]
+atlas = ExtResource("1_ti8a4")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dnya4"]
+atlas = ExtResource("1_ti8a4")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i8gcc"]
+atlas = ExtResource("1_ti8a4")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ftjwp"]
+atlas = ExtResource("1_ti8a4")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cy7d5"]
+atlas = ExtResource("1_ti8a4")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7jhkb"]
+atlas = ExtResource("1_ti8a4")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ejfto"]
+atlas = ExtResource("1_ti8a4")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cooh5"]
+atlas = ExtResource("1_ti8a4")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ngsag"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uvacn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r08pg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nx4ax")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eyudh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jmqx7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cidxd")
+}],
+"loop": 1,
+"name": &"collected",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_llfh3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dnya4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i8gcc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ftjwp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cy7d5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7jhkb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ejfto")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cooh5")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2iwt8"]
+radius = 12.0
+
+[node name="Flower" type="Area2D" unique_id=515553713]
+script = ExtResource("1_i8gcc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2068728933]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_ngsag")
+animation = &"collected"
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2078735583]
+shape = SubResource("CircleShape2D_2iwt8")
+
+[node name="CollectedSound" type="AudioStreamPlayer2D" parent="." unique_id=919715967]
+stream = ExtResource("4_cy7d5")
+volume_db = 24.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]
